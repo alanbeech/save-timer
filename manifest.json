@@ -4,8 +4,8 @@
   "description": "A simple timer to help you save time effectively.",
   "icons": [
     {
-      "src": "images/icon.png",
-      "type": "image/png",
+      "src": "images/icon.svg",
+      "type": "image/svg",
       "sizes": "256x256"
     }
   ]
