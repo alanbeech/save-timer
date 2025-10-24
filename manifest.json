@@ -1,0 +1,12 @@
+{
+  "name": "Save Timer",
+  "version": "1.0",
+  "description": "A simple timer to help you save time effectively.",
+  "icons": [
+    {
+      "src": "icons/icon.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ]
+}

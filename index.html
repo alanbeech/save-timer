@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Save Timer</title>
+    <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+    <h1>Save Timer</h1>
+    <p>This application saves the time you start a timer and displays the elapsed time even after refreshing the page.</p>
+    <button id="startButton">Start Timer</button>
+    <div id="timerDisplay">Elapsed Time: 0 seconds</div>
+
+    <script>
+        const startButton = document.getElementById('startButton');
+        const timerDisplay = document.getElementById('timerDisplay');
+        let startTime = localStorage.getItem('startTime');
+
+        function updateTimer() {
+            if (startTime) {
+                const elapsedTime = Math.floor((Date.now() - parseInt(startTime)) / 1000);
+                timerDisplay.textContent = `Elapsed Time: ${elapsedTime} seconds`;
+            }
+        }
+
+        startButton.addEventListener('click', () => {
+            startTime = Date.now().toString();
+            localStorage.setItem('startTime', startTime);
+            updateTimer();
+        });
+
+        // Update the timer every second
+        setInterval(updateTimer, 1000);
+
+        // Initialize timer display on page load
+        updateTimer();
+    </script>
+
+</body>
+</html>
