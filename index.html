@@ -5,38 +5,144 @@
     <title>Save Timer</title>
     <link rel="manifest" href="manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <h1>Save Timer</h1>
-    <p>This application saves the time you start a timer and displays the elapsed time even after refreshing the page.</p>
-    <button id="startButton">Start Timer</button>
-    <div id="timerDisplay">Elapsed Time: 0 seconds</div>
+    <main>
+
+        <h1>Save Timer</h1>
+        <time id="time">
+            00:00:00
+        </time>
+
+        <ul>
+            <li>
+
+                <div>
+                    <img src="images/dishwasher.svg" alt="dishwasher"><br>
+                    Dishwasher<br>
+                    <time id="dishwasher-time"></time>
+                </div>
+            </li>
+            <li>
+                <img src="images/breadmaker.svg" alt="breadmaker">
+                <div>
+                    Breadmaker<br>
+                    <time id="breadmaker-time"></time>
+                </div>
+            </li>
+            <li>
+                <img src="images/washing-machine.svg" alt="washing machine">
+                <div>
+                    Washing Machine<br>
+                    <time id="washing-machine-time"></time>
+                </div>
+
+            </li>
+        </ul>
+
+
+
+    </main>
 
     <script>
-        const startButton = document.getElementById('startButton');
-        const timerDisplay = document.getElementById('timerDisplay');
-        let startTime = localStorage.getItem('startTime');
-
-        function updateTimer() {
-            if (startTime) {
-                const elapsedTime = Math.floor((Date.now() - parseInt(startTime)) / 1000);
-                timerDisplay.textContent = `Elapsed Time: ${elapsedTime} seconds`;
-            }
+        // show current time in the <time> element
+        function updateTime() {
+            const timeElement = document.getElementById('time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            timeElement.textContent = `${hours}:${minutes}`;
         }
 
-        startButton.addEventListener('click', () => {
-            startTime = Date.now().toString();
-            localStorage.setItem('startTime', startTime);
-            updateTimer();
-        });
+        // show time until 5am tomorrow for dishwasher
+        function updateBreadmakerTime() {
+            const dishwasherTimeElement = document.getElementById('breadmaker-time');
+            const now = new Date();
+            const tomorrow5am = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 5, 0, 0);
+            const diff = tomorrow5am - now;
 
-        // Update the timer every second
-        setInterval(updateTimer, 1000);
+            const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
 
-        // Initialize timer display on page load
-        updateTimer();
+            dishwasherTimeElement.textContent = `${hours}:${minutes}`;
+        }
+
+        // show time until 4:30am tomorrow for washing machine
+        function updateWashingMachineTime() {
+            const washingMachineTimeElement = document.getElementById('washing-machine-time');
+            const now = new Date();
+            const tomorrow430am = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 4, 30, 0);
+            const diff = tomorrow430am - now;
+            const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+            washingMachineTimeElement.textContent = `${hours}:${minutes}`;
+        }
+
+        // show time until 12:00 for dishwasher-time
+        function updateDishwasherTime() {
+            const dishwasherTimeElement = document.getElementById('dishwasher-time');
+            const now = new Date();
+            const tomorrow12pm = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+            const diff = tomorrow12pm - now;
+            const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+            dishwasherTimeElement.textContent = `${hours}:${minutes}`;
+        }
+
+
+
+
+
+
+
+
+
+        setInterval(updateTime, 1000);
+        setInterval(updateBreadmakerTime, 1000);
+        setInterval(updateWashingMachineTime, 1000);
+        setInterval(updateDishwasherTime, 1000);
+        updateTime(); // initial call to set time immediately
+
     </script>
+
+
+<!--    <p>This application saves the time you start a timer and displays the elapsed time even after refreshing the page.</p>-->
+<!--    <button id="startButton">Start Timer</button>-->
+<!--    <div id="timerDisplay">Elapsed Time: 0 seconds</div>-->
+
+<!--    <script>-->
+<!--        const startButton = document.getElementById('startButton');-->
+<!--        const timerDisplay = document.getElementById('timerDisplay');-->
+<!--        let startTime = localStorage.getItem('startTime');-->
+
+<!--        function updateTimer() {-->
+<!--            if (startTime) {-->
+<!--                const elapsedTime = Math.floor((Date.now() - parseInt(startTime)) / 1000);-->
+<!--                timerDisplay.textContent = `Elapsed Time: ${elapsedTime} seconds`;-->
+<!--            }-->
+<!--        }-->
+
+<!--        startButton.addEventListener('click', () => {-->
+<!--            startTime = Date.now().toString();-->
+<!--            localStorage.setItem('startTime', startTime);-->
+<!--            updateTimer();-->
+<!--        });-->
+
+<!--        // Update the timer every second-->
+<!--        setInterval(updateTimer, 1000);-->
+
+<!--        // Initialize timer display on page load-->
+<!--        updateTimer();-->
+<!--    </script>-->
 
 </body>
 </html>
