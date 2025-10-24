@@ -17,7 +17,7 @@ body {
 }
 
 main {
-    // border: 1px solid red;
+    //border: 1px solid red;
     width: 70%;
 }
 
@@ -36,9 +36,9 @@ ul {
 li {
     margin: 10px 0;
     font-size: 1.2em;
-    // border: 1px solid red;
-    //text-align: left;
+    //border: 1px solid red;
     white-space: nowrap;
+    height: 150px;
 }
 
 img {

@@ -106,13 +106,17 @@
 
 
 
+        let updateInterval = 1000;
 
+        setInterval(updateTime, updateInterval);
+        setInterval(updateBreadmakerTime, updateInterval);
+        setInterval(updateWashingMachineTime, updateInterval);
+        setInterval(updateDishwasherTime, updateInterval);
+        updateTime();
+        updateBreadmakerTime();
+        updateWashingMachineTime();
+        updateDishwasherTime();
 
-        setInterval(updateTime, 1000);
-        setInterval(updateBreadmakerTime, 1000);
-        setInterval(updateWashingMachineTime, 1000);
-        setInterval(updateDishwasherTime, 1000);
-        updateTime(); // initial call to set time immediately
 
     </script>
 
