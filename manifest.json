@@ -1,6 +1,8 @@
 {
   "name": "Save Timer",
   "version": "1.0",
+  "display": "standalone",
+  "start_url": ".",
   "description": "A simple timer to help you save time effectively.",
   "icons": [
     {
