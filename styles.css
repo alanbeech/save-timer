@@ -23,7 +23,7 @@ main {
 
 h1 {
     font-size: 2em;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 ul {
@@ -34,11 +34,10 @@ ul {
 }
 
 li {
-    margin: 10px 0;
     font-size: 1.2em;
     //border: 1px solid red;
     white-space: nowrap;
-    height: 150px;
+    height: 130px;
 }
 
 img {
