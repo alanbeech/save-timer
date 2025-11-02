@@ -111,7 +111,7 @@
             const washingMachineTimeElement = document.getElementById('washing-machine-time');
             let now = new Date();
 
-            now = roundUpToNearestXMinutes(now, x);
+            now = roundUpToNearestXMinutes(now, 30);
 
             const tomorrow430am = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 4, 30, 0);
             const diff = tomorrow430am - now;
