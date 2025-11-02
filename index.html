@@ -74,6 +74,11 @@
             return new Date(Math.floor(date.getTime() / ms) * ms);
         }
 
+        function roundUpToNearestXMinutes(now, x) {
+            const ms = 1000 * 60 * x; // milliseconds in x minutes
+            return new Date(Math.ceil(now.getTime() / ms) * ms);
+        }
+
         // show current time in the <time> element
         function updateTime() {
             const timeElement = document.getElementById('time');
@@ -87,7 +92,10 @@
         // show time until 5am tomorrow for breadmaker
         function updateBreadmakerTime() {
             const dishwasherTimeElement = document.getElementById('breadmaker-time');
-            const now = new Date();
+            let now = new Date();
+
+            now = roundUpToNearestTenMinutes(now);
+
             const tomorrow5am = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 5, 0, 0);
             const diff = tomorrow5am - now;
 
@@ -101,7 +109,10 @@
         // show time until 4:30am tomorrow for washing machine
         function updateWashingMachineTime() {
             const washingMachineTimeElement = document.getElementById('washing-machine-time');
-            const now = new Date();
+            let now = new Date();
+
+            now = roundUpToNearestXMinutes(now, x);
+
             const tomorrow430am = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 4, 30, 0);
             const diff = tomorrow430am - now;
             const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
